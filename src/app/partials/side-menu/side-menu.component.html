@@ -1,0 +1,16 @@
+<ul>
+    <li *ngFor="let item of items; let i=index">
+        <ng-container *ngIf="item.children; then parent; else simple"></ng-container>
+        <ng-template #parent>
+            <li>{{ item.title }}</li>
+            <ul *ngIf="item.children">
+                <li *ngFor="let children of item.children; let ii=index">
+                    <a [routerLink]="children.link">{{ children.title }}</a>
+                </li>
+            </ul>
+        </ng-template>
+        <ng-template #simple>
+            <a [routerLink]="item.link">{{ item.title }}</a>
+        </ng-template>
+    </li>
+</ul>
